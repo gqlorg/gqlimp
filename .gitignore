@@ -1,0 +1,9 @@
+.DS_Store
+.idea
+.env
+.editorconfig
+.nyc_output
+coverage
+node_modules
+output
+package-lock.json

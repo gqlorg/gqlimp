@@ -1,0 +1,72 @@
+{
+  "name": "gqlimp",
+  "version": "0.0.2",
+  "description": "Graphql Client Generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec --bail --check-leaks test/",
+    "cover": "nyc --reporter html --reporter text npm run test",
+    "travis-cover": "nyc --reporter lcovonly npm run test"
+  },
+  "bin": {
+    "gqlimp": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gqlorg/gqlimp.git"
+  },
+  "keywords": [
+    "graphql",
+    "client",
+    "type",
+    "query",
+    "mutation",
+    "generator",
+    "typescript",
+    "javascript",
+    "generate"
+  ],
+  "contributors": [
+    "Eray Hanoglu <e.hanoglu@panates.com>",
+    "Arhun Hınçalan <ahincalan@hotmail.com>"
+  ],
+  "engines": {
+    "node": ">= 6.0"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "lib/"
+  ],
+  "nyc": {
+    "temp-dir": "./coverage/.nyc_output"
+  },
+  "author": "Panates",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gqlorg/gqlimp/issues"
+  },
+  "homepage": "https://github.com/gqlorg/gqlimp#readme",
+  "devDependencies": {
+    "app-root-path": "^2.1.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-register": "^6.26.0",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.12.1",
+    "eslint-config-google": "^0.11.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "rimraf": "^2.6.3"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "command-line-args": "^5.0.2",
+    "command-line-usage": "^5.0.5",
+    "gql-fetch": "^0.1.2",
+    "ts-node": "^8.0.2"
+  }
+}

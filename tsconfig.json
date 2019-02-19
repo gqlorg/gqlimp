@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": false,
+    "target": "es5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "lib": ["es2015", "dom"]
+  },
+  "exclude": [
+    "node_modules",
+    "test"
+  ]
+}
