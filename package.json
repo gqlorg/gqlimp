@@ -1,6 +1,6 @@
 {
   "name": "gqlimp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Graphql Client Generator",
   "main": "index.js",
   "scripts": {
