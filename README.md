@@ -41,9 +41,170 @@ Options
   --help                                   (-h) Print this usage guide.                               
 ```
 
+#### Public root classes
 
+* QueryObject & MutationObject
+    * Properties
+        * query
+        * args         
+        
+        
+## How to working "gqlimp" tool?
+
+##### Example graphql server schema type (url -> http://example.com:5000/api)
+
+```ts
+
+  type Phone {
+    gsm: String
+    note: String
+  }
+
+  type User {
+    id: Int
+    name: String  
+    phone: Phone       
+  }
+  
+  type Query {    
+    user(id: Int!): User     
+  }
+  
+  input PhoneInput {
+    gsm: String
+    note: String
+  }  
+  
+  input UserInput {
+    name: String  
+    phone: PhoneInput    
+  } 
+  
+  type Mutation {
+    createUser(user: UserInput): User
+  }    
+  
+```
+
+##### Execute command:
+
+```sh
+$ gqlimp --url http://example.com:5000/api -g
+```
+
+##### Generated file (schema-types.ts) view with "gqlimp" 
+
+```ts
+
+  export interface Phone_intf {
+	gsm? : boolean | number;
+	note? : boolean | number;
+  }
+
+  export interface User_intf {
+	id? : boolean | number;
+	name? : boolean | number;
+	phone? : User_phone;	
+  } 
+
+  export interface Query_intf {
+	user? : Query_user;
+  }
+  
+  export interface Mutation_intf {
+    createUser? : Mutation_createUser;
+  }
+  
+  export class QueryObject ...
+  
+  export class MutationObject ...
+  
+  export class Query_user ...
+  
+  export class User_phone ...
+  
+  export class Mutation_createUser ...
+
+```
+
+##### Usage client "schema-types.ts" file
+
+Query Example:
+```ts
+
+  import { QueryObject } from './schema-types';
+    
+  const qo = new QueryObject({
+    user: new Query_user({
+      id: true,
+      name: true,
+      phone: new User_phone({
+        gsm: true,
+        note: true
+      })  
+    })
+  });
+  
+  console.log(qo.query);
+  /* Output
+  query {
+    user {
+      id
+      name
+      phone {
+        gsm
+        note
+      }
+    }
+  }
+  */
+
+```
+
+Mutation Example:
+```ts
+
+  import { QueryObject } from './schema-types';
+    
+  const qo = new MutationObject({
+    createUser: new Mutation_createUser({     
+      name: 'User 1',
+      phone: {
+        gsm: 'User Gsm',
+        note: 'Note'
+      }  
+    },
+    {
+      id: true,
+      name: true      
+    })
+  });
+  
+  console.log(qo.query);
+  /* Output
+    mutation ($name: String, $phone: PhoneInput) {
+      createUser(name: $name, phone: $phone ) {
+        id
+        name
+      }
+    }
+  
+  console.log(qo.args);
+  /* Output
+    {
+      name: 'User 1',
+      phone: {
+        gsm: 'User Gsm',
+        note: 'Note'
+      }
+    }
+  */
+
+```
 
 ---
+
+
 
 ## Node Compatibility
 
