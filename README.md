@@ -22,7 +22,25 @@ When there is a change in the query scheme created on the server, the client wil
 $ npm install gqlimp
 ```
 
-## Usage
+## Features
+
+Feature Guide
+```sh
+$ gqlimp --help
+```
+
+```sh
+Options
+
+  --url required                           (-u) This parameter graphql server url                     
+  --fileName default "schema-types"        (-f) This parameter output schema file name                
+  --generate optional                      (-g) This parameter with generate output file              
+  --output default "output"                (-o) This parameter output folder path                     
+  --verbose optional                       (-v) This parameter print schema console                   
+  --type options "ts", "js" default "ts"   (-t) This parameter to output "typescript" or "javascript" 
+  --help                                   (-h) Print this usage guide.                               
+```
+
 
 
 ---
