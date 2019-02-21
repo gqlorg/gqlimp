@@ -34,6 +34,9 @@ async function run() {
     return;
   }
 
+  options['output'] = options['output'] || 'output';
+  options['fileName'] = options['fileName'] || 'schema-types';
+
   if (options['generate'] || options['verbose']) {
 
     const schemaParser = new SchemaParser(options);
@@ -44,7 +47,9 @@ async function run() {
       if (options['type'] === 'js') {
 
         const exec = require('child_process').exec;
-        exec('tsc --rootDir ./output',
+        exec('tsc ./' + options['output'] + '/' +
+            options['fileName'] +
+            '.ts --target es5 --downlevelIteration --lib esnext --declaration true',
             function(error) {
               if (error !== null) {
                 console.error(chalk.red('exec error: ' + error));
