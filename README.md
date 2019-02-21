@@ -114,7 +114,7 @@ $ gqlimp --url http://example.com:5000/api -g
   export interface Mutation_intf {
     createUser? : Mutation_createUser;
   }
-  
+  /*
   export class QueryObject ...
   
   export class MutationObject ...
@@ -124,6 +124,7 @@ $ gqlimp --url http://example.com:5000/api -g
   export class User_phone ...
   
   export class Mutation_createUser ...
+  */
 
 ```
 
