@@ -9,9 +9,14 @@
 
 [![NPM](https://nodei.co/npm/gqlimp.png?downloads=true&downloadRank=true)](https://nodei.co/npm/gqlimp/)
 
-## Motivation
+## Installation
+
+```sh
+$ npm install gqlimp
+```
 
 ## Usage
+
 
 ---
 

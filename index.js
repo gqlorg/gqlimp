@@ -21,6 +21,7 @@ async function run() {
 
   if (options['help']) {
     console.log(chalk.blue(usage));
+    return;
   }
 
   if (!options['url']) {
