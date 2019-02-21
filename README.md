@@ -97,23 +97,24 @@ $ gqlimp --url http://example.com:5000/api -g
 ```ts
 
   export interface Phone_intf {
-	gsm? : boolean | number;
-	note? : boolean | number;
+    gsm? : boolean | number;
+    note? : boolean | number;
   }
 
   export interface User_intf {
-	id? : boolean | number;
-	name? : boolean | number;
-	phone? : User_phone;	
+    id? : boolean | number;
+    name? : boolean | number;
+    phone? : User_phone;	
   } 
 
   export interface Query_intf {
-	user? : Query_user;
+    user? : Query_user;
   }
   
   export interface Mutation_intf {
     createUser? : Mutation_createUser;
   }
+  
   /*
   export class QueryObject ...
   
