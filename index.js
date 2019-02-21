@@ -25,7 +25,7 @@ async function run() {
   }
 
   if (!options['url']) {
-    console.error(chalk.red('Host "--url" not found'));
+    console.error(chalk.red('Host "--url" not found. Did you need help? Try --help'));
     return;
   }
 
@@ -41,22 +41,19 @@ async function run() {
 
     const schemaParser = new SchemaParser(options);
 
-    if (options['generate']) {
-      schemaParser.generate();
+    await schemaParser.generate();
 
-      if (options['type'] === 'js') {
+    if (options['type'] === 'js') {
 
-        const exec = require('child_process').exec;
-        exec('tsc ./' + options['output'] + '/' +
-            options['fileName'] +
-            '.ts --target es5 --downlevelIteration --lib esnext --declaration true',
-            function(error) {
-              if (error !== null) {
-                console.error(chalk.red('exec error: ' + error));
-              }
-            });
-      }
-
+      const exec = require('child_process').exec;
+      exec('tsc ./' + options['output'] + '/' +
+          options['fileName'] +
+          '.ts --target es5 --downlevelIteration --lib esnext --declaration true',
+          function(error) {
+            if (error !== null) {
+              console.error(chalk.red('exec error: ' + error));
+            }
+          });
     }
 
     if (options['verbose']) {
