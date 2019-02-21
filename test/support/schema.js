@@ -31,7 +31,7 @@ module.exports = buildSchema(`
     
   type User {
     id: Int
-    name: String
+    name: String!
     email: String
     kind: UserKind
     mask: HashID
@@ -52,7 +52,7 @@ module.exports = buildSchema(`
   
   type Query {    
     user(id: Int!): User
-    users(country: CountryInput, gender: Gender): [User]  
+    users(country: CountryInput, gender: [Gender]): [User]  
     timeoutServer(interval: Int!): String 
     serverName: String
   }

@@ -52,7 +52,7 @@ describe('Parser prepare and properties tests', function() {
     const unhook_stdout = hook_stream(process.stdout, function(string) {
       logs.push(string);
     });
-    const opt = {...options, ...{verbose: true}};
+    const opt = {...options, ...{verbose: true, generate: false}};
     const sp = new SchemaParser(opt);
     await sp.generate();
     unhook_stdout();
@@ -72,6 +72,7 @@ describe('Parser prepare and properties tests', function() {
         -1, true);
     assert.strictEqual(content.indexOf('export interface Country_intf') >
         -1, true);
+    sp._addInterface({});
   });
 
   it('Should be export file in schema enums', async () => {
@@ -85,6 +86,8 @@ describe('Parser prepare and properties tests', function() {
         -1, true);
     assert.strictEqual(content.indexOf('export enum UserKind ') >
         -1, true);
+    sp._addEnum({name: 'Gender'});
+    assert.strictEqual(typeof sp.enums['Gender'], 'object');
   });
 
   it('Should be export file in schema inputs', async () => {
@@ -98,6 +101,13 @@ describe('Parser prepare and properties tests', function() {
         -1, true);
     assert.strictEqual(content.indexOf('export interface PhoneInput_args') >
         -1, true);
+  });
+
+  it('Should be response null to incorrect url', async () => {
+    options.url = options.url + 'a';
+    const sp = new SchemaParser(options);
+    await sp.generate();
+    assert.strictEqual(sp._response, null);
   });
 
 });

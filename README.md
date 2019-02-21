@@ -9,6 +9,13 @@
 
 [![NPM](https://nodei.co/npm/gqlimp.png?downloads=true&downloadRank=true)](https://nodei.co/npm/gqlimp/)
 
+Gqlimp is an executable npm package created for client applications that communicate with the graphql server. 
+The reasons to create this tool are to accelerate development of server applications coded with graphql in the client part and to increase client - server interaction.
+
+It is intended that the query scheme created on the graphql server can be used easily and accurately in the client application via Gqlimp.Thanks to perform programmatic processing when creating a query, it can be developped code more flexible and faster in client side.
+
+When there is a change in the query scheme created on the server, the client will be aware of this change and will have to make the necessary arrangements thanks to the import mechanism.
+
 ## Installation
 
 ```sh
