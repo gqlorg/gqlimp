@@ -4,10 +4,10 @@ const chalk = require('chalk');
 const commandLineUsage = require('command-line-usage');
 const commandLineArgs = require('command-line-args');
 const SchemaParser = require('./lib/SchemaParser').SchemaParser;
+const {cliHelpSections, cliOptions} = require('./lib/constants');
 
-const {helpSections, optionDefinitions} = require('./lib/constants');
-const options = commandLineArgs(optionDefinitions, {stopAtFirstUnknown: true});
-const usage = commandLineUsage(helpSections);
+const options = commandLineArgs(cliOptions, {stopAtFirstUnknown: true});
+const usage = commandLineUsage(cliHelpSections);
 
 async function run() {
 

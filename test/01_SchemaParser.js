@@ -1,6 +1,7 @@
 /* eslint-disable */
+require('./support/env');
 const assert = require('assert');
-const GqlApplication = require('./support/app');
+const GQLApplication = require('./support/app');
 const SchemaParser = require('../lib/SchemaParser').SchemaParser;
 const fs = require('fs');
 
@@ -16,13 +17,11 @@ describe('Parser prepare and properties tests', function() {
   };
 
   before(() => {
-    app = new GqlApplication();
-    app.start(port);
+    app = new GQLApplication();
+    return app.start(port);
   });
 
-  after(() => {
-    app.stop();
-  });
+  after(() => app.stop());
 
   it('Should created with "test" file name', async () => {
     const sp = new SchemaParser(options);
@@ -40,7 +39,6 @@ describe('Parser prepare and properties tests', function() {
   });
 
   it('Should work with verbose parameter', async () => {
-
     const logs = [];
     const hook_stream = function(_stream, fn) {
       let old_write = _stream.write;

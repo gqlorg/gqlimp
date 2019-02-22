@@ -4,34 +4,32 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const resolvers = require('./resolvers');
 
-module.exports = class GqlApplication {
+module.exports = class GQLApplication {
 
   constructor() {
 
-    this.express = express();
-    this.express.use('/graphql', graphqlHTTP((req, res) => {
-      res.set('Access-Control-Allow-Origin', '*');
-      if (req.headers.authorization) {
-        const header = req.headers.authorization;
-        res.setHeader('authorization', header);
-      }
-      return {
-        schema: schema,
-        rootValue: resolvers,
-        graphiql: true,
-        context: {
-          request: req,
-          response: res
-        }
-      };
-    }));
+    this.app = express();
+    this.app.use('/graphql', graphqlHTTP(() => ({
+          schema: schema,
+          rootValue: resolvers
+        }))
+    );
   }
 
   start(port) {
-    this.server = this.express.listen(port || 4000);
+    return new Promise(((resolve, reject) => {
+      this.server = this.app.listen(port || 4000, (err) => {
+        if (err)
+          return reject(err);
+        resolve();
+      });
+    }));
   }
 
   stop() {
-    this.server.close();
+    return new Promise((resolve => {
+      this.server.on('close', resolve);
+      this.server.close();
+    }));
   }
 };

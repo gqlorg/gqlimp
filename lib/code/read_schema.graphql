@@ -1,0 +1,57 @@
+query {
+    __schema {
+        types {
+            kind
+            name
+            enumValues {
+                name
+                description
+            }
+            inputFields {
+                name
+                type {
+                    kind
+                    name
+                    ofType {
+                        kind
+                        name
+                        ofType {
+                            kind
+                            name
+                        }
+                    }
+                }
+            }
+            fields {
+                name
+                type {
+                    kind
+                    name
+                    ofType {
+                        kind
+                        name
+                        ofType {
+                            kind
+                            name
+                        }
+                    }
+                }
+                args {
+                    name
+                    type {
+                        kind
+                        name
+                        ofType {
+                            kind
+                            name
+                            ofType {
+                                kind
+                                name
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
