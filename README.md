@@ -32,13 +32,16 @@ $ gqlimp --help
 ```sh
 Options
 
-  --url required                           (-u) This parameter graphql server url                     
-  --fileName default "schema-types"        (-f) This parameter output schema file name                
-  --generate optional                      (-g) This parameter with generate output file              
-  --output default "output"                (-o) This parameter output folder path                     
-  --verbose optional                       (-v) This parameter print schema console                   
-  --type options "ts", "js" default "ts"   (-t) This parameter to output "typescript" or "javascript" 
-  --help                                   (-h) Print this usage guide.                               
+  --url required                                                                                      (-u) This parameter graphql server url                     
+  --fileName default "schema-types"                                                                   (-f) This parameter output schema file name                
+  --generate optional                                                                                 (-g) This parameter with generate output file              
+  --output default "output"                                                                           (-o) This parameter output folder path                     
+  --verbose optional                                                                                  (-v) This parameter print schema console                   
+  --properties options "enums","interfaces","inputs","customScalars","helpers","args" default "all"   (-p) You can choose specific properties with parameter     
+  --type options "ts", "js" default "ts"                                                              (-t) This parameter to output "typescript" or "javascript" 
+  --compileTarget options "es5", "es6", "es2016", "es2017", "esnext" default "es5"                    (-c) You can choose compile target with parameter          
+  --compileLib options "es5", "es6", "es2016", "es2017", "esnext" default "esnext"                    (-t) You can choose compile lib with parameter             
+  --help 
 ```
 
 #### Public root classes

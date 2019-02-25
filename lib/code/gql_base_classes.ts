@@ -118,14 +118,3 @@ export class GQLBaseObject< T > extends GQLClass< T > {
 
 }
 
-export class QueryObject extends GQLBaseObject<Query_intf> {
-    get queryType(): string {
-        return 'query';
-    }
-}
-
-export class MutationObject extends GQLBaseObject<Mutation_intf> {
-    get queryType(): string {
-        return 'mutation';
-    }
-}
