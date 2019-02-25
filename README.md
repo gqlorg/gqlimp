@@ -49,7 +49,7 @@ Options
         * args         
         
         
-## How to working "gqlimp" tool?
+## How to work "gqlimp" tool?
 
 ##### Example graphql server schema type (url -> http://example.com:5000/api)
 
