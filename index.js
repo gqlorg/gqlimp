@@ -4,7 +4,8 @@ const chalk = require('chalk');
 const commandLineUsage = require('command-line-usage');
 const commandLineArgs = require('command-line-args');
 const ReadSchema = require('./lib/ReadSchema').ReadSchema;
-const FileBuilder = require('./lib/FileBuilder').FileBuilder;
+const CodeGenerator = require('./lib/CodeGenerator').CodeGenerator;
+const {FileGenerator, prepareProperties} = require('./lib/FileGenerator');
 const {cliHelpSections, cliOptions} = require('./lib/constants');
 
 const options = commandLineArgs(cliOptions, {stopAtFirstUnknown: true});
@@ -37,71 +38,55 @@ async function run() {
 
   if (options['generate'] || options['verbose']) {
 
-    const readSchema = new ReadSchema(options);
-    const schema = await readSchema.getSchema(options);
-    const permitted = ['enums', 'interfaces', 'customScalars',
-      'helpers', 'inputs', 'args'];
-    let trusted = [];
-
-    for (const item of options['properties']) {
-      const index = permitted.indexOf(item);
-      if (index > -1 || item === 'all') {
-        trusted.push(item);
-      }
-    }
-
-    if (trusted.length === 1 &&
-        trusted[0] === 'all' &&
-        options['multiFile']) {
-      trusted = permitted;
-    }
-
-    if (options['multiFile'] && trusted.includes('interfaces')) {
-      const dep = ['helpers', 'args'];
-      for (const k of dep) {
-        if (!trusted.includes(k))
-          trusted.push(k);
-      }
-    }
-
-    if (trusted.length === 0) return;
+    const props = prepareProperties({
+      properties: options['properties'],
+      multiFile: options['multiFile']
+    });
 
     if (options['verbose']) {
-      if (trusted.includes('all'))
+
+      const readSchema = new ReadSchema(options);
+      const schema = await readSchema.getSchema(options);
+
+      if (props.includes('all'))
         console.log(schema.data);
       else {
-        for (const k of trusted) {
+        for (const k of props) {
           console.log(schema.data[k]);
         }
       }
-    } else {
-      const fileBuilder = new FileBuilder(options, schema.data);
-      const files = [];
 
-      for (const key of trusted) {
-        fileBuilder.generate(key);
-        files.push('./' + options['output'] + '/' +
-            options['fileName'] + '-' + key + '.ts');
+    } else if (options['generate']) {
+
+      const codeGenerator = new CodeGenerator(options);
+
+      const fg = new FileGenerator({
+        output: options['output'],
+        compileTarget: options['compileTarget'],
+        compileLib: options['compileLib']
+      });
+
+      for (const key of props) {
+
+        const content = await codeGenerator.generate(key);
+        const err = fg.generate(content, options['fileName'] + '-' + key);
+        if (err) {
+          console.error(chalk['red'](err));
+        }
       }
 
       if (options['type'] === 'js') {
-
-        const execSync = require('child_process').execSync;
-        execSync('tsc ' + files.join(' ') +
-            ' --target ' + options['compileTarget'] +
-            ' --downlevelIteration --lib ' + options['compileLib'] +
-            ' --declaration true',
-            function(error) {
-              if (error !== null) {
-                console.error(chalk.red('exec error: ' + error));
-              }
-            });
+        for (const k of props) {
+          fg.fileName = options['fileName'] + '-' + k;
+          const err = fg.compileSource();
+          if (err) {
+            console.log(chalk['red'](err));
+          }
+        }
       }
 
     }
-
   }
-
 }
 
 run().catch(e => {

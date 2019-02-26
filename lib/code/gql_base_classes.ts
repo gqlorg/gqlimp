@@ -7,7 +7,7 @@ export class GQLClass<T> {
 
 export class GQLWithoutFieldsArgsClass<T> {
 
-    public types: any = {};
+    public argsMap: any = {};
 
     constructor(public args: T) {
     }
@@ -16,7 +16,7 @@ export class GQLWithoutFieldsArgsClass<T> {
 
 export class GQLArgsClass<T, Q> extends GQLClass<Q> {
 
-    public types: any = {};
+    public argsMap: any = {};
 
     constructor(public args: T, public fields: Q) {
         super(fields);
