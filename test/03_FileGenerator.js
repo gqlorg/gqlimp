@@ -7,7 +7,7 @@ const rimraf = require('rimraf');
 const {FileGenerator, prepareProperties} = require('../lib/FileGenerator');
 const CodeGenerator = require('../lib/CodeGenerator').CodeGenerator;
 
-describe('FileBuilder Tests', function() {
+describe('FileGenerator Tests', function() {
 
   let app;
   const port = 4000;

@@ -67,6 +67,6 @@
     "command-line-args": "^5.0.2",
     "command-line-usage": "^5.0.5",
     "gql-fetch": "^0.2.1",
-    "ts-node": "^8.0.3"
+    "typescript": "^3.3.3333"
   }
 }

@@ -4,7 +4,7 @@ const assert = require('assert');
 const GQLApplication = require('./support/app');
 const CodeGenerator = require('../lib/CodeGenerator').CodeGenerator;
 
-describe('FileBuilder Tests', function() {
+describe('CodeGenerator Tests', function() {
 
   let app;
   const port = 4000;
