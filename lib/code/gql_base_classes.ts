@@ -24,7 +24,7 @@ export class GQLArgsClass<T, Q> extends GQLClass<Q> {
 
 }
 
-export class GQLBaseObject< T > extends GQLClass< T > {
+export class GQLBaseObject<T> extends GQLClass<T> {
 
     private readonly _query: string;
     private _args: object;
@@ -70,7 +70,7 @@ export class GQLBaseObject< T > extends GQLClass< T > {
                         const args = obj[key].args;
                         const types = obj[key].types;
                         this._argTypes = this._argTypes || {};
-                        this._args = { ...this._args, ...args };
+                        this._args = {...this._args, ...args};
                         let sa = '';
                         for (const k in args) {
                             if (args.hasOwnProperty(k)) {
@@ -106,7 +106,7 @@ export class GQLBaseObject< T > extends GQLClass< T > {
             str += this._query;
             str += '}';
         } else {
-            str += '{\n' + this._query + '\n}';
+            str += this.queryType + ' {\n' + this._query + '\n}';
         }
         return str;
     }
