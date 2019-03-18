@@ -32,6 +32,7 @@ Parameters Guide
 - **output**: Folder path of output (default: "output").
 - **properties**: To import chosen specific properties (default: "all" - options: "enums", "interfaces", "inputs", "customScalars", "helpers", "args").
 - **type**: File type of output (default: "ts" - options: for javascript -> "js", for typescript -> "ts").
+- **realTypes**: To add real field types (default: false) 
 - **compileTarget**: It is used when type parameter is "js" (default: "es5" - options: "es5", "es6", "es2016", "es2017", "esnext" ).
 - **compileLib**: It is used when type parameter is "js" (default: "esnext" - options: "es5", "es6", "es2016", "es2017", "esnext" ). 
 
