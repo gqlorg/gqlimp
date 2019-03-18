@@ -53,6 +53,14 @@ describe('CodeGenerator Tests', function() {
     assert.strictEqual(!!content, true);
   });
 
+  it('Should generate "interfaces" kind file with real types', async () => {
+    const opt = {...options};
+    opt.realType = true;
+    const cg = new CodeGenerator(opt);
+    const content = await cg.generate('interfaces');
+    assert.strictEqual(!!content, true);
+  });
+
   it('Should generate "args" kind file', async () => {
     const cg = new CodeGenerator(options);
     const content = await cg.generate('args');
