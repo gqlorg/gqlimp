@@ -66,9 +66,9 @@ export class GQLBaseObject<T> extends GQLClass<T> {
                 if (obj[key] instanceof GQLArgsClass || obj[key] instanceof GQLWithoutFieldsArgsClass) {
                     tab++;
                     str += ' ' + key;
-                    if (obj[key].args && obj[key].types) {
+                    if (obj[key].args && obj[key].argsMap) {
                         const args = obj[key].args;
-                        const types = obj[key].types;
+                        const types = obj[key].argsMap;
                         this._argTypes = this._argTypes || {};
                         this._args = {...this._args, ...args};
                         let sa = '';
