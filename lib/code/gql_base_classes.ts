@@ -43,7 +43,11 @@ export class GQLBaseObject<T> extends GQLClass<T> {
         let str = '';
         for (const key in this._argTypes) {
             if (this._argTypes.hasOwnProperty(key)) {
-                str += (str !== '' ? ',' : '') + '$' + key + ' : ' + this._argTypes[key];
+                let aType = this._argTypes[key];
+                if (aType.indexOf('[]') > -1) {
+                    aType = '[' + aType.replace('[]', '') + ']';
+                }
+                str += (str !== '' ? ',' : '') + '$' + key + ' : ' + aType;
             }
         }
         return str;
